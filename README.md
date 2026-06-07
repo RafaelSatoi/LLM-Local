@@ -44,8 +44,9 @@ O sistema foi unificado em uma interface de linha de comando (CLI) interativa. A
 ### 1. Pré-requisitos: Ollama e Modelos
 Como este projeto foca em privacidade e roda offline, o motor de inferência precisa estar configurado no seu sistema antes de executar o código Python.
 
-1. Baixe e instale o [Ollama](https://ollama.com/download) de acordo com o seu sistema operacional.
-2. Com o aplicativo do Ollama rodando em segundo plano, abra o seu terminal e faça o download dos dois modelos utilizados no projeto através dos comandos:
+1. **Python:** Certifique-se de ter o **Python 3.13.3** instalado na sua máquina (versão utilizada para garantir a estabilidade do pipeline e compatibilidade das bibliotecas).
+2. **Ollama:** Baixe e instale o [Ollama](https://ollama.com/download) de acordo com o seu sistema operacional.
+3. Com o aplicativo do Ollama rodando em segundo plano, abra o seu terminal e faça o download dos dois modelos utilizados no projeto através dos comandos:
 
 ```bash
 ollama pull mxbai-embed-large:latest
