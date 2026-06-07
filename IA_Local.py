@@ -32,7 +32,7 @@ if choose == 1:
 
     # Conection
     print("Conexão com a Base Local")
-    db = FAISS.load_local("./banco_vetores/v2", embedding, allow_dangerous_deserialization=True)
+    db = FAISS.load_local("./banco_vetores", embedding, allow_dangerous_deserialization=True)
 
     # Object
     retriever = db.as_retriever(
@@ -121,7 +121,7 @@ elif choose == 2:
     print("Criando Banco de Dados Vetorizados")
 
     db = FAISS.from_documents(lc_docs, embedding)
-    db.save_local("./banco_vetores/v2")
+    db.save_local("./banco_vetores")
 
     print("Sucesso ao Criar!")
 
