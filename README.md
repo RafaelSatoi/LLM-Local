@@ -41,8 +41,49 @@ A ingestão foi aplicada intencionalmente nas páginas iniciais do documento de 
 
 O sistema foi unificado em uma interface de linha de comando (CLI) interativa. Ao rodar o script, um menu permite alternar entre o ciclo de criação e o de consumo da base de dados.
 
-### 1. Instalação das Dependências
+### 1. Pré-requisitos: Ollama e Modelos
+Como este projeto foca em privacidade e roda offline, o motor de inferência precisa estar configurado no seu sistema antes de executar o código Python.
+
+1. Baixe e instale o [Ollama](https://ollama.com/download) de acordo com o seu sistema operacional.
+2. Com o aplicativo do Ollama rodando em segundo plano, abra o seu terminal e faça o download dos dois modelos utilizados no projeto através dos comandos:
+
+```bash
+ollama pull mxbai-embed-large:latest
+ollama pull qwen3:4b-instruct
+```
+
+### 2. Instalação das Dependências
 Com o terminal aberto na raiz do projeto, instale todas as bibliotecas necessárias rodando o comando:
 
 ```bash
 pip install -r requirements.txt
+```
+
+### 3. Execução do Sistema
+Execute o script principal:
+
+``` bash
+python IA_Local.py
+```
+
+Você verá o seguinte menu no terminal:
+
+``` plaintext
+Escolha uma opção: 
+1-Rag 
+2-Banco Vetorizado
+
+Numero:
+```
+
+* **Opção 1 (Rag):** Abre a interface de chat. Carrega o banco vetorial local indexado, solicita a sua pergunta, exibe no terminal os trechos/páginas correspondentes encontrados pelo FAISS e aciona a chain para a LLM gerar a resposta contextualizada.
+* **Opção 2 (Banco Vetorizado):** Deve ser executada primeiro. Ela carrega o arquivo Historia.pdf, aplica o splitter semântico nos dados, converte os formatos e gera os arquivos de índice do FAISS salvando-os localmente na pasta `./banco_vetores`.
+
+---
+
+### ⚠️ Aviso sobre o Banco de Teste e Escalonamento
+
+Para fins de validação do protótipo e controle de ruído, o banco vetorial atual foi gerado utilizando apenas as **2 primeiras páginas** do arquivo de teste (`Historia.pdf`). 
+* **Ao usar a Opção 1 (RAG):** Certifique-se de fazer perguntas aderentes a esse pequeno contexto inicial para obter as melhores respostas da LLM.
+* **Quer testar com o documento inteiro?** É muito simples escalar o projeto! Abra o código-fonte (`IA_Local.py`), vá até o bloco da Opção 2 e ajuste a restrição `if i < 2` no momento da leitura do documento. Depois, basta rodar a Opção 2 novamente no terminal para que o FAISS vetorize o PDF com sua personalização.
+
